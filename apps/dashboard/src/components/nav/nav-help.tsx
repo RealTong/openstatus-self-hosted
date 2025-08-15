@@ -1,6 +1,5 @@
 "use client";
 
-import { FormDialogSupportContact } from "@/components/forms/support-contact/dialog";
 import { DiscordIcon } from "@/components/icons/discord";
 import { GitHubIcon } from "@/components/icons/github";
 import {
@@ -50,12 +49,6 @@ export function NavHelp() {
                 <DropdownMenuLabel className="text-muted-foreground text-xs">
                   Get Help
                 </DropdownMenuLabel>
-                <FormDialogSupportContact>
-                  <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-                    <LifeBuoy />
-                    Support
-                  </DropdownMenuItem>
-                </FormDialogSupportContact>
                 <DropdownMenuItem asChild>
                   <Link
                     href="https://docs.openstatus.dev"

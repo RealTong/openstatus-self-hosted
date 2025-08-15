@@ -29,8 +29,6 @@ import {
   type ImageWithCaptionProps,
 } from "./image-with-caption";
 import Pre from "./pre";
-import type { SimpleChartProps } from "./simple-chart";
-import { SimpleChart } from "./simple-chart";
 
 export const components = {
   a: ({ href = "", ...props }: AnchorHTMLAttributes<HTMLAnchorElement>) => {
@@ -70,13 +68,7 @@ export const components = {
       </div>
     );
   },
-  SimpleChart: (props: SimpleChartProps) => {
-    return (
-      <div className="not-prose">
-        <SimpleChart {...props} />
-      </div>
-    );
-  },
+  
   Callout: (props: CalloutProps) => {
     return (
       <div className="not-prose my-5">

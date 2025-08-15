@@ -1,4 +1,3 @@
-import { AppHeader } from "@/components/layout/header/app-header";
 import { api } from "@/trpc/server";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
@@ -23,7 +22,6 @@ export default async function AppLayout(props: {
   // TODO: create a WorkspaceContext to store the `Workspace` object including the `slug` and `plan.limits`
   return (
     <div className="container relative mx-auto flex min-h-screen w-full flex-col items-center justify-center gap-6 p-4">
-      <AppHeader />
       <main className="z-10 flex w-full flex-1 flex-col items-start justify-center">
         {children}
       </main>

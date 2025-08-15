@@ -10,8 +10,6 @@ export const env = createEnv({
     TINY_BIRD_API_KEY: z.string(),
     RESEND_API_KEY: z.string(),
     CRON_SECRET: z.string(),
-    UNKEY_TOKEN: z.string(),
-    UNKEY_API_ID: z.string(),
     SLACK_FEEDBACK_WEBHOOK_URL: z.string().optional(),
   },
 
@@ -23,8 +21,6 @@ export const env = createEnv({
     TINY_BIRD_API_KEY: process.env.TINY_BIRD_API_KEY,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     CRON_SECRET: process.env.CRON_SECRET,
-    UNKEY_TOKEN: process.env.UNKEY_TOKEN,
-    UNKEY_API_ID: process.env.UNKEY_API_ID,
     SLACK_FEEDBACK_WEBHOOK_URL: process.env.SLACK_FEEDBACK_WEBHOOK_URL,
   },
   skipValidation: process.env.NODE_ENV === "test",

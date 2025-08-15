@@ -11,7 +11,6 @@ import {
 } from "@/components/forms/form-card";
 import { Button } from "@/components/ui/button";
 
-import { FormDialogSupportContact } from "@/components/forms/support-contact/dialog";
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 import { Check, Copy } from "lucide-react";
 import { z } from "zod";
@@ -52,21 +51,6 @@ export function FormSlug({ defaultValues }: { defaultValues?: FormValues }) {
           )}
         </Button>
       </FormCardContent>
-      <FormCardFooter className="[&>:last-child]:ml-0">
-        <FormCardFooterInfo>
-          Used when interacting with the API or for help on Discord.{" "}
-          <FormDialogSupportContact>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="px-0 py-0 text-accent-foreground hover:bg-transparent dark:hover:bg-transparent"
-            >
-              Let us know
-            </Button>
-          </FormDialogSupportContact>{" "}
-          if you&apos;d like to change it.
-        </FormCardFooterInfo>
-      </FormCardFooter>
     </FormCard>
   );
 }

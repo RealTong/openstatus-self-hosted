@@ -4,12 +4,6 @@ import { Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
 import * as React from "react";
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@openstatus/ui/src/components/accordion";
 import { Button } from "@openstatus/ui/src/components/button";
 import {
   Sheet,
@@ -19,7 +13,6 @@ import {
   SheetTrigger,
 } from "@openstatus/ui/src/components/sheet";
 
-import { marketingPagesConfig } from "@/config/pages";
 import { socialsConfig } from "@/config/socials";
 import { useWindowScroll } from "@/hooks/use-window-scroll";
 import { cn } from "@/lib/utils";
@@ -55,57 +48,6 @@ export function MarketingMenu() {
           <SheetTitle className="text-left">Menu</SheetTitle>
         </SheetHeader>
         <div className="flex flex-1 flex-col justify-between gap-8">
-          <ul className="grid gap-1">
-            {marketingPagesConfig.map(({ href, title, icon, children }) => {
-              if (!children) {
-                const isExternal = href.startsWith("http");
-                const _externalProps = isExternal ? { target: "_blank" } : {};
-                const _isActive = pathname.startsWith(href);
-                return (
-                  <li key={href} className="w-full">
-                    <ListItemSingle
-                      title={title}
-                      href={href}
-                      icon={icon}
-                      onClick={() => setOpen(false)}
-                    />
-                  </li>
-                );
-              }
-
-              return (
-                <li key={href}>
-                  <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value={title}>
-                      <AccordionTrigger>{title}</AccordionTrigger>
-                      <AccordionContent>
-                        <ul>
-                          {children.map((page) => {
-                            const { href, title, icon } = page;
-                            const isExternal = href.startsWith("http");
-                            const _externalProps = isExternal
-                              ? { target: "_blank" }
-                              : {};
-                            const _isActive = pathname.startsWith(href);
-                            return (
-                              <li key={href} className="w-full">
-                                <ListItem
-                                  title={title}
-                                  href={href}
-                                  icon={icon}
-                                  onClick={() => setOpen(false)}
-                                />
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-                </li>
-              );
-            })}
-          </ul>
           <div className="flex justify-between gap-2">
             <ul className="flex flex-wrap gap-2">
               {socialsConfig.map((props, _i) => (

@@ -2,7 +2,6 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
 import { ThemeToggle } from "@/components/theme/theme-toggle";
-import { alternativesConfig } from "@/config/alternatives";
 import { socialsConfig } from "@/config/socials";
 import { cn } from "@/lib/utils";
 import { Shell } from "../dashboard/shell";
@@ -32,45 +31,6 @@ export function MarketingFooter({ className }: Props) {
               </p>
             </div>
             <StatusWidgetContainer slug="status" />
-          </div>
-          <div className="col-span-1 flex flex-col gap-3 text-sm">
-            <p className="font-semibold text-foreground">Compare</p>
-            {Object.keys(alternativesConfig).map((slug) => (
-              <FooterLink
-                key={slug}
-                href={`/compare/${slug}`}
-                label={
-                  alternativesConfig[slug as keyof typeof alternativesConfig]
-                    .name
-                }
-              />
-            ))}
-          </div>
-          <div className="col-span-1 flex flex-col gap-3 text-sm">
-            <p className="font-semibold text-foreground">Company</p>
-            <FooterLink href="/about" label="About" />
-            <FooterLink href="/changelog" label="Changelog" />
-            <FooterLink href="/legal/terms" label="Terms" />
-            <FooterLink href="/legal/privacy" label="Privacy" />
-          </div>
-          <div className="col-span-1 flex flex-col gap-3 text-sm">
-            <p className="font-semibold text-foreground">Resources</p>
-            <FooterLink href="/blog" label="Blog" />
-            <FooterLink href="/pricing" label="Pricing" />
-            <FooterLink href="https://docs.openstatus.dev" label="Docs" />
-            <FooterLink href="/oss-friends" label="OSS Friends" />
-            <FooterLink href="/status" label="External Providers Monitoring" />
-          </div>
-          <div className="col-span-1 flex flex-col gap-3 text-sm">
-            <p className="font-semibold text-foreground">Tools</p>
-            <FooterLink href="/play" label="Playground" />
-            <FooterLink href="/play/checker" label="Speed Checker" />
-            <FooterLink href="/play/curl" label="cURL Builder" />
-            <FooterLink href="https://openstat.us" label="All Status Codes" />
-            <FooterLink
-              href="https://light.openstatus.dev"
-              label="Vercel Edge Ping"
-            />
           </div>
         </div>
         <div className="flex items-center justify-between gap-3">

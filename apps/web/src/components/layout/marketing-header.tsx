@@ -4,16 +4,9 @@ import Link, { type LinkProps } from "next/link";
 import { usePathname } from "next/navigation";
 
 import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
   NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@openstatus/ui/src/components/navigation-menu";
 
-import { marketingPagesConfig } from "@/config/pages";
 import { cn } from "@/lib/utils";
 import * as React from "react";
 import { Icons, type ValidIcon } from "../icons";
@@ -44,59 +37,6 @@ export function MarketingHeader({ className }: Props) {
             "mx-auto hidden items-center justify-center border border-transparent md:flex md:gap-1",
           )}
         >
-          <NavigationMenu>
-            <NavigationMenuList>
-              {marketingPagesConfig.map((page) => {
-                const { href, title, children } = page;
-                if (!children) {
-                  return (
-                    <NavigationMenuItem key={title}>
-                      <Link href={href} legacyBehavior passHref>
-                        <NavigationMenuLink
-                          className={cn(
-                            navigationMenuTriggerStyle(),
-                            "h-9 rounded-full bg-transparent text-muted-foreground hover:bg-accent/50",
-                            { "text-foreground": href === pathname },
-                          )}
-                        >
-                          {title}
-                        </NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuItem>
-                  );
-                }
-
-                return (
-                  <NavigationMenuItem key={href}>
-                    <NavigationMenuTrigger className="h-9 rounded-full bg-transparent text-muted-foreground hover:bg-transparent data-[state=open]:text-accent-foreground">
-                      {title}
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                        {children?.map((item) => {
-                          const isExternal = item.href.startsWith("http");
-                          const _externalProps = isExternal
-                            ? { target: "_blank" }
-                            : {};
-                          const _isActive = pathname.startsWith(item.href);
-                          return (
-                            <ListItem
-                              key={item.title}
-                              title={item.title}
-                              href={item.href}
-                              icon={item.icon}
-                            >
-                              {item.description}
-                            </ListItem>
-                          );
-                        })}
-                      </ul>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                );
-              })}
-            </NavigationMenuList>
-          </NavigationMenu>
         </div>
       </div>
       <div className="flex items-center justify-end gap-3">

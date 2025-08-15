@@ -1,4 +1,3 @@
-const { withContentCollections } = require("@content-collections/next");
 const { withSentryConfig } = require("@sentry/nextjs");
 
 // REMINDER: avoid Clickjacking attacks by setting the X-Frame-Options header
@@ -78,7 +77,6 @@ const nextConfig = {
 };
 
 module.exports = withSentryConfig(
-  async () => await withContentCollections(nextConfig),
   {
     // For all available options, see:
     // https://github.com/getsentry/sentry-webpack-plugin#options

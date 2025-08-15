@@ -210,13 +210,7 @@ export const marketingResourcePagesConfig = [
     segment: "changelog",
     icon: "newspaper",
   },
-  {
-    href: "/play/checker",
-    title: "Speed Checker",
-    description: "Check your endpoints latency right away.",
-    segment: "checker",
-    icon: "gauge",
-  },
+  
   {
     href: "/compare",
     title: "Compare",
