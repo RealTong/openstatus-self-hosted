@@ -24,7 +24,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-import { UpgradeDialog } from "@/components/dialogs/upgrade";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTRPC } from "@/lib/trpc/client";
 import { cn } from "@/lib/utils";
@@ -187,10 +186,6 @@ export function NavStatusPages() {
           </SidebarMenuItem>
         )}
       </SidebarMenu>
-      <UpgradeDialog
-        open={openUpgradeDialog}
-        onOpenChange={setOpenUpgradeDialog}
-      />
     </SidebarGroup>
   );
 }

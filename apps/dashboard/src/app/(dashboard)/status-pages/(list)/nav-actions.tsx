@@ -1,6 +1,5 @@
 "use client";
 
-import { UpgradeDialog } from "@/components/dialogs/upgrade";
 import { NavFeedback } from "@/components/nav/nav-feedback";
 import { Button } from "@/components/ui/button";
 import { useTRPC } from "@/lib/trpc/client";
@@ -35,7 +34,6 @@ export function NavActions() {
           <Link href="/status-pages/create">Create Status Page</Link>
         </Button>
       )}
-      <UpgradeDialog open={openDialog} onOpenChange={setOpenDialog} />
     </div>
   );
 }

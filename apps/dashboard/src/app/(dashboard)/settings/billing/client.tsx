@@ -8,7 +8,6 @@ import {
   SectionHeader,
   SectionTitle,
 } from "@/components/content/section";
-import { DataTable } from "@/components/data-table/billing/data-table";
 import {
   FormCard,
   FormCardContent,
@@ -198,9 +197,6 @@ export function Client() {
               </FormCardDescription>
             </FormCardHeader>
             <FormCardSeparator />
-            <FormCardContent className="pb-4">
-              <DataTable />
-            </FormCardContent>
           </FormCard>
         </FormCardGroup>
       </Section>

@@ -3,7 +3,6 @@
 import { useParams, useSelectedLayoutSegment } from "next/navigation";
 
 import type { Page } from "@/config/pages";
-import { ProBanner } from "../billing/pro-banner";
 import { AppLink } from "./app-link";
 
 function replacePlaceholders(
@@ -43,9 +42,6 @@ export function AppSidebar({ page }: { page?: Page }) {
             );
           })}
         </ul>
-      </div>
-      <div className="hidden lg:block">
-        <ProBanner />
       </div>
     </div>
   );

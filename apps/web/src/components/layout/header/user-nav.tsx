@@ -64,9 +64,6 @@ export function UserNav() {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-            <Link href={`/app/${workspaceSlug}/settings/billing`}>Billing</Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild>
             <Link href={`/app/${workspaceSlug}/settings/user`}>Profile</Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>{" "}

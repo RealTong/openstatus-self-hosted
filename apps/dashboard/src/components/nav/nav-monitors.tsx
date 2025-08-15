@@ -5,7 +5,6 @@ import { useState } from "react";
 import { MoreHorizontal, Plus } from "lucide-react";
 
 import { ExportCodeDialog } from "@/components/dialogs/export-code";
-import { UpgradeDialog } from "@/components/dialogs/upgrade";
 import { QuickActions } from "@/components/dropdowns/quick-actions";
 import {
   SidebarGroup,
@@ -218,10 +217,7 @@ export function NavMonitors() {
         )}
       </SidebarMenu>
       <ExportCodeDialog open={openDialog} onOpenChange={setOpenDialog} />
-      <UpgradeDialog
-        open={openUpgradeDialog}
-        onOpenChange={setOpenUpgradeDialog}
-      />
+      
     </SidebarGroup>
   );
 }

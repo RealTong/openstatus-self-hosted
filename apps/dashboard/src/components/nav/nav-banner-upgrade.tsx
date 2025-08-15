@@ -12,7 +12,6 @@ import { useTRPC } from "@/lib/trpc/client";
 import { useQuery } from "@tanstack/react-query";
 import { Rocket, X } from "lucide-react";
 import { useState } from "react";
-import { UpgradeDialog } from "../dialogs/upgrade";
 
 export function NavBannerUpgrade({ handleClose }: { handleClose: () => void }) {
   const trpc = useTRPC();
@@ -49,7 +48,6 @@ export function NavBannerUpgrade({ handleClose }: { handleClose: () => void }) {
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>
-      <UpgradeDialog open={open} onOpenChange={setOpen} />
     </SidebarGroup>
   );
 }

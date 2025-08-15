@@ -38,31 +38,6 @@ export function AppHeader() {
           <Breadcrumbs />
           {/*  */}
           <div className="flex items-center gap-1">
-            <ul className="hidden gap-1 sm:flex">
-              <li className="w-full">
-                <Button variant="link" asChild>
-                  <Link
-                    href="/changelog"
-                    target="_blank"
-                    onClick={() => setLastViewed(new Date().toISOString())}
-                    className="relative"
-                  >
-                    Changelog
-                    {show ? (
-                      <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-green-500" />
-                    ) : null}
-                  </Link>
-                </Button>
-              </li>
-              <li className="w-full">
-                <Button variant="link" asChild>
-                  <Link href="/docs" target="_blank" className="group">
-                    Docs
-                    <ArrowUpRight className="ml-1 h-4 w-4 shrink-0 text-muted-foreground group-hover:text-foreground" />
-                  </Link>
-                </Button>
-              </li>
-            </ul>
             <div className="relative">
               <Skeleton className="h-8 w-8 rounded-full" />
               <div className="absolute inset-0">
