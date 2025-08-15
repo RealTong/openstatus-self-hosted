@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export function ReportInfoBanner() {
   return (
-    <Alert className="max-w-4xl">
+    <Alert className="max-full">
       <Megaphone className="h-4 w-4" />
       <AlertTitle>Looking for Status Reports?</AlertTitle>
       <AlertDescription>

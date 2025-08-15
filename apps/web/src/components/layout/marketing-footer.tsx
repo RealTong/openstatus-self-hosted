@@ -3,7 +3,6 @@ import Link from "next/link";
 
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { alternativesConfig } from "@/config/alternatives";
-import { landingsConfig } from "@/config/landings";
 import { socialsConfig } from "@/config/socials";
 import { cn } from "@/lib/utils";
 import { Shell } from "../dashboard/shell";
@@ -33,18 +32,6 @@ export function MarketingFooter({ className }: Props) {
               </p>
             </div>
             <StatusWidgetContainer slug="status" />
-          </div>
-          <div className="col-span-1 flex flex-col gap-3 text-sm">
-            <p className="font-semibold text-foreground">Product</p>
-            {Object.keys(landingsConfig).map((slug) => (
-              <FooterLink
-                key={slug}
-                href={`/${slug}`}
-                label={
-                  landingsConfig[slug as keyof typeof landingsConfig].title
-                }
-              />
-            ))}
           </div>
           <div className="col-span-1 flex flex-col gap-3 text-sm">
             <p className="font-semibold text-foreground">Compare</p>

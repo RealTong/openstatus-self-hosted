@@ -1,7 +1,5 @@
 import type { ValidIcon } from "@/components/icons";
 
-import { landingsConfig } from "./landings";
-
 export type Page = {
   title: string;
   subtitle?: string;
@@ -197,20 +195,6 @@ export const pagesConfig = [
 
 type MarketingPageType = Page;
 
-export const marketingProductPagesConfig = [
-  ...Object.entries(landingsConfig).map(
-    ([key, { title, description, icon }]) => {
-      return {
-        title,
-        href: `/${key}`,
-        description,
-        icon,
-        segment: "product",
-      };
-    },
-  ),
-] as const satisfies MarketingPageType[];
-
 export const marketingResourcePagesConfig = [
   {
     href: "/blog",
@@ -243,14 +227,14 @@ export const marketingResourcePagesConfig = [
 ] as const satisfies Page[];
 
 export const marketingPagesConfig = [
-  {
-    href: "/product",
-    title: "Product",
-    description: "All product features for OpenStatus",
-    segment: "product",
-    icon: "package",
-    children: marketingProductPagesConfig,
-  },
+  // {
+  //   href: "/product",
+  //   title: "Product",
+  //   description: "All product features for OpenStatus",
+  //   segment: "product",
+  //   icon: "package",
+  //   children: marketingProductPagesConfig,
+  // },
   {
     href: "/resources",
     description: "All resources for OpenStatus",

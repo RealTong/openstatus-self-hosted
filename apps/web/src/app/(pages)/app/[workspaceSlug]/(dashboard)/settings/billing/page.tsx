@@ -2,7 +2,6 @@ import { Progress, Separator } from "@openstatus/ui";
 
 import { api } from "@/trpc/server";
 import { CustomerPortalButton } from "./_components/customer-portal-button";
-import { SettingsPlan } from "./_components/plan";
 
 export default async function BillingPage() {
   const workspace = await api.workspace.getWorkspace.query();
@@ -36,7 +35,6 @@ export default async function BillingPage() {
         })}
       </div>
       <Separator className="my-4" />
-      <SettingsPlan workspace={workspace} />
     </div>
   );
 }
