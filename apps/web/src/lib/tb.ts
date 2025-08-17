@@ -1,8 +1,8 @@
-import { OSTinybird } from "@openstatus/tinybird";
+import { OSTimescale } from "@openstatus/timescale";
 
 import { env } from "@/env";
 
-const tb = new OSTinybird(env.TINY_BIRD_API_KEY);
+const tb = new OSTimescale(env.TIMESCALE_URL);
 
 // REMINDER: we could extend the limits (WorkspacePlan) by
 // knowing which plan the user is on and disable some periods
@@ -203,17 +203,17 @@ export function prepareGetByPeriod(period: "30d", type: Type = "http") {
 
 // FOR MIGRATION
 export type ResponseTimeMetrics = Awaited<
-  ReturnType<OSTinybird["legacy_httpMetricsDaily"]>
+  ReturnType<OSTimescale["httpMetricsDaily"]>
 >["data"][number];
 
 export type ResponseTimeMetricsByRegion = Awaited<
-  ReturnType<OSTinybird["httpMetricsByRegionDaily"]>
+  ReturnType<OSTimescale["httpMetricsByRegionDaily"]>
 >["data"][number];
 
 export type ResponseGraph = Awaited<
-  ReturnType<OSTinybird["httpMetricsByIntervalDaily"]>
+  ReturnType<OSTimescale["httpMetricsByIntervalDaily"]>
 >["data"][number];
 
 export type ResponseStatusTracker = Awaited<
-  ReturnType<OSTinybird["httpStatusWeekly"]>
+  ReturnType<OSTimescale["httpStatusWeekly"]>
 >["data"][number];

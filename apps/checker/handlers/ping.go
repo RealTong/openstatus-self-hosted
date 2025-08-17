@@ -4,11 +4,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/cenkalti/backoff/v4"
 	"github.com/gin-gonic/gin"
 	"github.com/openstatushq/openstatus/apps/checker"
+	"github.com/openstatushq/openstatus/apps/checker/pkg/timescale"
 	"github.com/openstatushq/openstatus/apps/checker/request"
 	"github.com/rs/zerolog/log"
 )
@@ -41,13 +43,10 @@ type Response struct {
 
 func (h Handler) PingRegionHandler(c *gin.Context) {
 	ctx := c.Request.Context()
-
-	dataSourceName := "check_response_http__v0"
 	region := c.Param("region")
 
 	if region == "" {
 		c.String(http.StatusBadRequest, "region is required")
-
 		return
 	}
 
@@ -55,7 +54,6 @@ func (h Handler) PingRegionHandler(c *gin.Context) {
 
 	if c.GetHeader("Authorization") != fmt.Sprintf("Basic %s", h.Secret) {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "unauthorized"})
-
 		return
 	}
 
@@ -63,7 +61,6 @@ func (h Handler) PingRegionHandler(c *gin.Context) {
 		if region != h.Region {
 			c.Header("fly-replay", fmt.Sprintf("region=%s", region))
 			c.String(http.StatusAccepted, "Forwarding request to %s", region)
-
 			return
 		}
 	}
@@ -79,14 +76,12 @@ func (h Handler) PingRegionHandler(c *gin.Context) {
 	if err := c.ShouldBindJSON(&req); err != nil {
 		log.Ctx(ctx).Error().Err(err).Msg("failed to decode checker request")
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request"})
-
 		return
 	}
 
 	var res checker.Response
 
 	op := func() error {
-
 		headers := make([]struct {
 			Key   string `json:"key"`
 			Value string `json:"value"`
@@ -107,47 +102,66 @@ func (h Handler) PingRegionHandler(c *gin.Context) {
 		}
 
 		r, err := checker.Http(c.Request.Context(), requestClient, input)
-
 		if err != nil {
 			return fmt.Errorf("unable to ping: %w", err)
-		}
-
-		timingAsString, err := json.Marshal(r.Timing)
-		if err != nil {
-			return fmt.Errorf("error while parsing timing data %s: %w", req.URL, err)
-		}
-
-		headersAsString, err := json.Marshal(r.Headers)
-		if err != nil {
-			return nil
-		}
-
-		tbData := PingResponse{
-			RequestId:   req.RequestId,
-			WorkspaceId: req.WorkspaceId,
-			StatusCode:  r.Status,
-			Latency:     r.Latency,
-			Body:        r.Body,
-			Headers:     string(headersAsString),
-			Timestamp:   r.Timestamp,
-			Timing:      string(timingAsString),
-			Region:      h.Region,
 		}
 
 		res = r
 		res.Region = h.Region
 
-		if tbData.RequestId != 0 {
-			if err := h.TbClient.SendEvent(ctx, tbData, dataSourceName); err != nil {
-				log.Ctx(ctx).Error().Err(err).Msg("failed to send event to tinybird")
+		// Send data to TimescaleDB instead of Tinybird
+		if req.RequestId != 0 {
+			// Convert timing to the format expected by TimescaleDB
+			timingMap := make(map[string]int64)
+			timingMap["dnsStart"] = r.Timing.DnsStart
+			timingMap["dnsDone"] = r.Timing.DnsDone
+			timingMap["connectStart"] = r.Timing.ConnectStart
+			timingMap["connectDone"] = r.Timing.ConnectDone
+			timingMap["tlsHandshakeStart"] = r.Timing.TlsHandshakeStart
+			timingMap["tlsHandshakeDone"] = r.Timing.TlsHandshakeDone
+			timingMap["firstByteStart"] = r.Timing.FirstByteStart
+			timingMap["firstByteDone"] = r.Timing.FirstByteDone
+			timingMap["transferStart"] = r.Timing.TransferStart
+			timingMap["transferDone"] = r.Timing.TransferDone
+
+			statusCodePtr := (*int16)(nil)
+			if r.Status != 0 {
+				statusCode := int16(r.Status)
+				statusCodePtr = &statusCode
+			}
+
+			var bodyPtr *string
+			if r.Body != "" {
+				bodyPtr = &r.Body
+			}
+
+			data := timescale.HttpResponse{
+				Timestamp:     r.Timestamp,
+				MonitorID:     strconv.FormatInt(req.RequestId, 10),
+				WorkspaceID:   strconv.FormatInt(req.WorkspaceId, 10),
+				Region:        h.Region,
+				URL:           req.URL,
+				Latency:       int32(r.Latency),
+				StatusCode:    statusCodePtr,
+				Error:         r.Error != "",
+				CronTimestamp: r.Timestamp,
+				Message:       nil,
+				Timing:        timingMap,
+				Headers:       r.Headers,
+				Body:          bodyPtr,
+				Trigger:       "api",
+			}
+
+			if err := h.TimescaleClient.InsertHttpResponse(data); err != nil {
+				log.Ctx(ctx).Error().Err(err).Msg("failed to send event to TimescaleDB")
 			}
 		}
 
 		return nil
 	}
+
 	if err := backoff.Retry(op, backoff.WithMaxRetries(backoff.NewExponentialBackOff(), 3)); err != nil {
 		c.JSON(http.StatusOK, gin.H{"message": "url not reachable"})
-
 		return
 	}
 

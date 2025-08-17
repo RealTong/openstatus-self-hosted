@@ -3,14 +3,14 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/openstatushq/openstatus/apps/checker/pkg/tinybird"
+	"github.com/openstatushq/openstatus/apps/checker/pkg/timescale"
 )
 
 type Handler struct {
-	TbClient      tinybird.Client
-	Secret        string
-	CloudProvider string
-	Region        string
+	TimescaleClient timescale.Client
+	Secret          string
+	CloudProvider   string
+	Region          string
 }
 
 // Authorization could be handle by middleware

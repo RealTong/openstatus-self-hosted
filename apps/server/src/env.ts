@@ -4,7 +4,7 @@ import { z } from "zod";
 
 export const env = createEnv({
   server: {
-    TINY_BIRD_API_KEY: z.string().min(1),
+    TIMESCALE_URL: z.string().min(1),
     UPSTASH_REDIS_REST_URL: z.string().min(1),
     UPSTASH_REDIS_REST_TOKEN: z.string().min(1),
     FLY_REGION: z.enum(flyRegions),

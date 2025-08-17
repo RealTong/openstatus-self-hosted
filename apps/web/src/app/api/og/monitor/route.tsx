@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-import { OSTinybird } from "@openstatus/tinybird";
+import { OSTimescale } from "@openstatus/timescale";
 
 import { DESCRIPTION, TITLE } from "@/app/shared-metadata";
 import { env } from "@/env";
@@ -8,7 +8,7 @@ import { BasicLayout } from "../_components/basic-layout";
 import { Tracker } from "../_components/tracker";
 import { SIZE, calSemiBold, interLight, interRegular } from "../utils";
 
-const tb = new OSTinybird(env.TINY_BIRD_API_KEY);
+const tb = new OSTimescale(env.TIMESCALE_URL);
 
 export const runtime = "edge";
 

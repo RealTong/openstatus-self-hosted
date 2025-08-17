@@ -6,7 +6,7 @@ import "@openstatus/db/env.mjs";
 
 export const env = createEnv({
   server: {
-    TINY_BIRD_API_KEY: z.string().min(1),
+    TIMESCALE_URL: z.string().min(1),
     RESEND_API_KEY: z.string().min(1),
     QSTASH_CURRENT_SIGNING_KEY: z.string().min(1),
     QSTASH_NEXT_SIGNING_KEY: z.string().min(1),
@@ -33,7 +33,7 @@ export const env = createEnv({
   runtimeEnv: {
     NEXT_PUBLIC_OPENPANEL_CLIENT_ID:
       process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID,
-    TINY_BIRD_API_KEY: process.env.TINY_BIRD_API_KEY,
+    TIMESCALE_URL: process.env.TINY_BIRD_API_KEY,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     QSTASH_CURRENT_SIGNING_KEY: process.env.QSTASH_CURRENT_SIGNING_KEY,
     QSTASH_NEXT_SIGNING_KEY: process.env.QSTASH_NEXT_SIGNING_KEY,

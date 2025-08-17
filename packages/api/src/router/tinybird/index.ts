@@ -10,7 +10,7 @@ import { env } from "../../env";
 import { createTRPCRouter, protectedProcedure } from "../../trpc";
 import { calculatePeriod } from "./utils";
 
-const tb = new OSTinybird(env.TINY_BIRD_API_KEY);
+const tb = new OSTinybird(env.TIMESCALE_URL);
 
 const periods = ["1d", "7d", "14d"] as const;
 const types = ["http", "tcp"] as const;

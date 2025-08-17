@@ -14,7 +14,7 @@ import (
 	"github.com/openstatushq/openstatus/apps/checker/handlers"
 
 	"github.com/openstatushq/openstatus/apps/checker/pkg/logger"
-	"github.com/openstatushq/openstatus/apps/checker/pkg/tinybird"
+	"github.com/openstatushq/openstatus/apps/checker/pkg/timescale"
 	"github.com/rs/zerolog/log"
 )
 
@@ -33,7 +33,7 @@ func main() {
 	// environment variables.
 	flyRegion := env("FLY_REGION", env("REGION", "local"))
 	cronSecret := env("CRON_SECRET", "")
-	tinyBirdToken := env("TINYBIRD_TOKEN", "")
+	timescaleUrl := env("TIMESCALE_URL", env("DATABASE_URL", ""))
 	logLevel := env("LOG_LEVEL", "warn")
 	cloudProvider := env("CLOUD_PROVIDER", "fly")
 
@@ -46,13 +46,16 @@ func main() {
 
 	defer httpClient.CloseIdleConnections()
 
-	tinybirdClient := tinybird.NewClient(httpClient, tinyBirdToken)
+	timescaleClient, err := timescale.NewClient(timescaleUrl)
+	if err != nil {
+		log.Ctx(ctx).Fatal().Err(err).Msg("failed to connect to TimescaleDB")
+	}
 
 	h := &handlers.Handler{
-		Secret:        cronSecret,
-		CloudProvider: cloudProvider,
-		Region:        flyRegion,
-		TbClient:      tinybirdClient,
+		Secret:          cronSecret,
+		CloudProvider:   cloudProvider,
+		Region:          flyRegion,
+		TimescaleClient: timescaleClient,
 	}
 
 	router := gin.New()

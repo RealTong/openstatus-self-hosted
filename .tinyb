@@ -1,0 +1,14 @@
+{
+    "host": "https://api.us-east.aws.tinybird.co",
+    "id": "dd659a47-e015-414a-a50f-2a7f46055079",
+    "name": "openstatus_test",
+    "scope": "user",
+    "token": "p.eyJ1IjogImRkNjU5YTQ3LWUwMTUtNDE0YS1hNTBmLTJhN2Y0NjA1NTA3OSIsICJpZCI6ICJjZjA1NjNmMi0zYjU0LTQ0NTctOGZhMi1lNmM2MDVkMzA2N2YiLCAiaG9zdCI6ICJ1cy1lYXN0LWF3cyJ9.eUEaMuK5cdkhsl8WgI4UgssVtDTqs1CFoOHAd66_d3k",
+    "tokens": {
+        "https://api.us-east.aws.tinybird.co": "p.eyJ1IjogImRkNjU5YTQ3LWUwMTUtNDE0YS1hNTBmLTJhN2Y0NjA1NTA3OSIsICJpZCI6ICJjZjA1NjNmMi0zYjU0LTQ0NTctOGZhMi1lNmM2MDVkMzA2N2YiLCAiaG9zdCI6ICJ1cy1lYXN0LWF3cyJ9.eUEaMuK5cdkhsl8WgI4UgssVtDTqs1CFoOHAd66_d3k"
+    },
+    "user_email": "i@realtong.cn",
+    "user_id": "a9cfb71f-b89d-460c-9568-d24dac5d1cba",
+    "user_token": "p.eyJ1IjogImE5Y2ZiNzFmLWI4OWQtNDYwYy05NTY4LWQyNGRhYzVkMWNiYSIsICJpZCI6ICI3ZWNlNjFkMC0zMjM4LTRjNmMtYjJlMy1mODJhNDNlMDljNGQiLCAiaG9zdCI6ICJ1cy1lYXN0LWF3cyJ9.vrFJE9-Y3aYG1N4qhb2tCDjAqd_KK9Mo0d2d1M_Cy-c",
+    "version": "0.0.1.dev285"
+}

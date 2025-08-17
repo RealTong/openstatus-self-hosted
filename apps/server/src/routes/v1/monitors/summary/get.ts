@@ -2,7 +2,7 @@ import { createRoute, z } from "@hono/zod-openapi";
 
 import { and, db, eq, isNull } from "@openstatus/db";
 import { monitor } from "@openstatus/db/src/schema";
-import { OSTinybird } from "@openstatus/tinybird";
+import { OSTimescale } from "@openstatus/timescale";
 import { Redis } from "@openstatus/upstash";
 
 import { env } from "@/env";
@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === "test") {
   require("@/libs/test/preload");
 }
 
-const tb = new OSTinybird(env.TINY_BIRD_API_KEY);
+const tb = new OSTimescale(env.TIMESCALE_URL);
 const redis = Redis.fromEnv();
 
 const getMonitorStats = createRoute({

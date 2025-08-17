@@ -10,7 +10,7 @@
         "\\!NEXT_PUBLIC_GIT_\\*",
         "DATABASE_URL",
         "DATABASE_AUTH_TOKEN",
-        "TINY_BIRD_API_KEY",
+        "TIMESCALE_URL",
         "NODE_ENV",
         "BLOB_READ_WRITE_TOKEN",
         "TEAM_ID_VERCEL",

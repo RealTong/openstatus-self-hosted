@@ -2,14 +2,14 @@ import { createRoute, z } from "@hono/zod-openapi";
 
 import { and, db, eq } from "@openstatus/db";
 import { monitor, monitorRun } from "@openstatus/db/src/schema";
-import { OSTinybird } from "@openstatus/tinybird";
+import { OSTimescale } from "@openstatus/timescale";
 
 import { env } from "@/env";
 import { OpenStatusApiError, openApiErrorResponses } from "@/libs/errors";
 import type { monitorsApi } from "../index";
 import { ParamsSchema, ResultRun } from "../schema";
 
-const tb = new OSTinybird(env.TINY_BIRD_API_KEY);
+const tb = new OSTimescale(env.TIMESCALE_URL);
 
 const getRoute = createRoute({
   method: "get",
